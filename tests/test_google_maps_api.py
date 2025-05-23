@@ -18,6 +18,7 @@ class TestCreatePlace:
         print("Метод POST по созданию новой локации")
         result_post = GoogleMapsApi.create_new_place()  # вызов метода по созданию новой локации
         Checking.check_status_code(result_post, 200)  # вызов метода по проверке статус-кода
+        Checking.check_json_fields(result_post, ['status', 'place_id', 'scope', 'reference', 'id'])
 
         check_post = result_post.json()
         place_id = check_post.get("place_id")  # получения place_id для метода GET
@@ -25,19 +26,26 @@ class TestCreatePlace:
         print("Метод GET для проверки созданной локации")
         result_get = GoogleMapsApi.get_new_place(place_id)  # отправка метода Get
         Checking.check_status_code(result_get, 200)  # вызов метода по проверке статус-кода
+        Checking.check_json_fields(result_get, ['location', 'accuracy', 'name', 'phone_number', 'address',
+                                                'types', 'website', 'language'])
 
         print("Метод PUT для изменения локации")
         result_put = GoogleMapsApi.put_new_place(place_id)  # изменение данных о созданной локации
         Checking.check_status_code(result_put, 200)  # вызов метода по проверке статус-кода
+        Checking.check_json_fields(result_put, ['msg'])
 
         print("Метод GET для проверки измененной локации")
         result_get = GoogleMapsApi.get_new_place(place_id)  # отправка метода Get
         Checking.check_status_code(result_get, 200)  # вызов метода по проверке статус-кода
+        Checking.check_json_fields(result_get, ['location', 'accuracy', 'name', 'phone_number', 'address',
+                                                'types', 'website', 'language'])
 
         print("Метод DELETE для удаления локации")
         result_delete = GoogleMapsApi.delete_new_place(place_id)  # удаление данных о созданной локации
         Checking.check_status_code(result_delete, 200)  # вызов метода по проверке статус-кода
+        Checking.check_json_fields(result_delete, ['status'])
 
         print("Метод GET для проверки удаленной локации")
         result_get = GoogleMapsApi.get_new_place(place_id)  # отправка метода Get
         Checking.check_status_code(result_get, 404)  # вызов метода по проверке статус-кода
+        Checking.check_json_fields(result_get, ['msg'])
