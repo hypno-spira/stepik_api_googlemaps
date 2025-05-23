@@ -31,7 +31,6 @@ class GoogleMapsApi:
         print(post_url)
         result_post = HttpMethods.post(post_url, json_for_create_new_place)
         print(result_post.json())
-        print(result_post.status_code)
         return result_post
 
     @staticmethod
@@ -42,7 +41,6 @@ class GoogleMapsApi:
         print(get_url)
         result_get = HttpMethods.get(get_url)
         print(result_get.json())
-        print(result_get.status_code)
         return result_get
 
     @staticmethod
@@ -58,7 +56,6 @@ class GoogleMapsApi:
         }
         result_put = HttpMethods.put(put_url, json_for_update_new_location)
         print(result_put.json())
-        print(result_put.status_code)
         return result_put
 
     @staticmethod
@@ -72,5 +69,4 @@ class GoogleMapsApi:
         }
         result_delete = HttpMethods.delete(delete_url, json_for_delete_new_location)
         print(result_delete.json())
-        print(result_delete.status_code)
         return result_delete
