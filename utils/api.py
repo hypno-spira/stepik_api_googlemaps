@@ -60,3 +60,17 @@ class GoogleMapsApi:
         print(result_put.json())
         print(result_put.status_code)
         return result_put
+
+    @staticmethod
+    def delete_new_place(place_id):
+        """Метод для удаления новой локации"""
+        delete_resource = "/maps/api/place/delete/json"  # ресурс метода Delete
+        delete_url = base_url + delete_resource + key
+        print(delete_url)
+        json_for_delete_new_location = {
+            "place_id": place_id
+        }
+        result_delete = HttpMethods.delete(delete_url, json_for_delete_new_location)
+        print(result_delete.json())
+        print(result_delete.status_code)
+        return result_delete
